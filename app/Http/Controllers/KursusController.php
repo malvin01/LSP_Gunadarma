@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kursus;
 use App\Http\Requests\Store\StoreKursusRequest;
+use App\Http\Requests\Update\UpdateKursusRequest;
 
 class KursusController extends Controller
 {
@@ -61,7 +62,9 @@ class KursusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kursus = Kursus::findOrFail($id);
+
+        return view('kursus.edit', compact('kursus'));
     }
 
     /**
@@ -71,9 +74,13 @@ class KursusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateKursusRequest $request, $id)
     {
-        //
+        $kursus = Kursus::findOrFail($id);
+
+        $kursus->update($request->validated());
+
+        return redirect(route('kursus.edit', $id))->with('message', 'Kursus berhasil diubah!!');;
     }
 
     /**
@@ -84,6 +91,10 @@ class KursusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kursus = Kursus::findOrFail($id);
+
+        $kursus->delete();
+
+        return redirect()->back()->with('message', 'Kursus berhasil dihapus!!');;
     }
 }
