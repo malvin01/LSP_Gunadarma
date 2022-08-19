@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('id_user');
             $table->foreign('id_user')->references('id_user')->on('users');
             $table->char('npm', 8);
-            $table->char('kelas', 4);
+            $table->char('kelas', 5);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('id_kursus');
             $table->foreign('id_kursus')->references('id_kursus')->on('kursus');
             $table->date('waktu_kursus');
-            $table->tinyInteger('lama_kursus');
+            $table->timestamps();
         });
     }
 

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KursusController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,8 @@ Route::group(['middleware' => ['auth']], function(){
     })->name('dashboard');
     
     Route::resource('kursus', KursusController::class);
-    
+    Route::resource('jadwal', JadwalController::class);
+    Route::resource('mahasiswa', MahasiswaController::class);
 });
 
 Route::get('/dashboard', function () {
