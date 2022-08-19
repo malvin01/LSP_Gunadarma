@@ -52,9 +52,9 @@
                                 </td>
                                 <td class="py-4 px-6 ">
                                     <div class="flex flex-row space-x-4">
-                                        <a href="{{ route('kursus.edit', $data->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                        <a href="{{ route('kursus.edit', $data->id_kursus) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
     
-                                        <form action="{{ route('kursus.destroy', $data->id) }}"
+                                        <form action="{{ route('kursus.destroy', $data->id_kursus) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')

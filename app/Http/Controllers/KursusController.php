@@ -37,7 +37,7 @@ class KursusController extends Controller
      */
     public function store(StoreKursusRequest $request)
     {
-        Kursus::create($request->validated);
+        Kursus::create($request->validated());
 
         return redirect(route('kursus.index'))->with('message', 'Kursus berhasil ditambah!!');;
     }
