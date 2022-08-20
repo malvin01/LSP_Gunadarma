@@ -6,6 +6,7 @@ use App\Http\Requests\Store\StoreJadwalRequest;
 use App\Http\Requests\Update\UpdateJadwalRequest;
 use App\Models\Jadwal;
 use App\Models\Kursus;
+use App\Models\KursusMahasiswa;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -17,6 +18,8 @@ class JadwalController extends Controller
      */
     public function index()
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $jadwal = Jadwal::paginate(10);
 
         return view('jadwal.index', compact('jadwal'));
@@ -29,6 +32,8 @@ class JadwalController extends Controller
      */
     public function create()
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $kursus = Kursus::all();
 
         return view('jadwal.create', compact('kursus'));
@@ -42,6 +47,8 @@ class JadwalController extends Controller
      */
     public function store(StoreJadwalRequest $request)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         Jadwal::create([
             'id_kursus' => $request->id_kursus,
             'waktu_kursus' => $request->waktu_kursus,
@@ -69,6 +76,8 @@ class JadwalController extends Controller
      */
     public function edit($id)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $kursus = Kursus::all();
 
         $jadwal = Jadwal::findOrFail($id);
@@ -85,6 +94,8 @@ class JadwalController extends Controller
      */
     public function update(UpdateJadwalRequest $request, $id)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $jadwal = Jadwal::findOrFail($id);
 
         $jadwal->update($request->validated());
@@ -100,10 +111,19 @@ class JadwalController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $jadwal = Jadwal::findOrFail($id);
 
         $jadwal->delete();
 
         return redirect()->back()->with('message', 'Jadwal berhasil dihapus!!');;
+    }
+
+    public function pendaftaran($id)
+    {
+        $pendaftaran = KursusMahasiswa::where('id_jadwal', $id)->paginate(10);
+
+        return view('jadwal.pendaftaran', compact('pendaftaran'));
     }
 }

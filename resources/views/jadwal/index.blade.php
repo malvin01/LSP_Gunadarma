@@ -52,6 +52,8 @@
                                 </td>
                                 <td class="py-4 px-6 ">
                                     <div class="flex flex-row space-x-4">
+                                        <a href="{{ route('jadwal.pendaftaran', $data->id_jadwal) }}" class="font-medium text-blue-600 hover:underline">Pendaftaran</a>
+
                                         <a href="{{ route('jadwal.edit', $data->id_jadwal) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
     
                                         <form action="{{ route('jadwal.destroy', $data->id_jadwal ) }}"

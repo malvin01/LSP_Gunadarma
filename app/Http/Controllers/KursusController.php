@@ -16,6 +16,8 @@ class KursusController extends Controller
      */
     public function index()
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $kursus = Kursus::paginate(10);
         return view('kursus.index', compact('kursus'));
     }
@@ -27,6 +29,8 @@ class KursusController extends Controller
      */
     public function create()
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         return view('kursus.create');
     }
 
@@ -38,6 +42,8 @@ class KursusController extends Controller
      */
     public function store(StoreKursusRequest $request)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         Kursus::create($request->validated());
 
         return redirect(route('kursus.index'))->with('message', 'Kursus berhasil ditambah!!');;
@@ -62,6 +68,8 @@ class KursusController extends Controller
      */
     public function edit($id)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $kursus = Kursus::findOrFail($id);
 
         return view('kursus.edit', compact('kursus'));
@@ -76,6 +84,8 @@ class KursusController extends Controller
      */
     public function update(UpdateKursusRequest $request, $id)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $kursus = Kursus::findOrFail($id);
 
         $kursus->update($request->validated());
@@ -91,6 +101,8 @@ class KursusController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(auth()->user()->role != 'admin', 403);
+
         $kursus = Kursus::findOrFail($id);
 
         $kursus->delete();

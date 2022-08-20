@@ -16,6 +16,43 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @if (auth()->user()->role == 'admin')
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('kursus.index')" :active="request()->is('kursus*')">
+                            {{ __('Kursus') }}
+                        </x-nav-link>
+                    </div> 
+                @endif
+                
+
+                @if (auth()->user()->role == 'admin')
+                 <!-- Navigation Links -->
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('jadwal.index')" :active="request()->is('jadwal*')">
+                        {{ __('Jadwal Kursus') }}
+                    </x-nav-link>
+                </div>
+                @endif
+
+                @if (auth()->user()->role == 'admin')
+                 <!-- Navigation Links -->
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('mahasiswa.index')" :active="request()->is('mahasiswa*')">
+                        {{ __('Mahasiswa') }}
+                    </x-nav-link>
+                </div>
+                @endif
+
+                @if (auth()->user()->role == 'admin')
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.index')" :active="request()->is('admin*')">
+                        {{ __('Admin') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->

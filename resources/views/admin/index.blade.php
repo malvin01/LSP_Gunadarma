@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Mahasiswa') }}
+            {{ __('Admin') }}
         </h2>
     </x-slot>
 
@@ -17,7 +17,7 @@
             @endif
 
             <div class="flex justify-end mb-4">
-                <a href="{{ route('mahasiswa.create') }}"  class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Tambah Mahasiswa</a>
+                <a href="{{ route('admin.create') }}"  class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Tambah Admin</a>
             </div>
 
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -31,10 +31,7 @@
                                 Nama
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Npm 
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Kelas
+                                NIK
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Action
@@ -42,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mahasiswa as $data)
+                        @foreach ($admin as $data)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $loop->iteration }}
@@ -51,10 +48,7 @@
                                     {{ $data->nama }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ $data->mahasiswa->npm }}
-                                </td>
-                                <td class="py-4 px-6">
-                                    {{ $data->mahasiswa->kelas }}
+                                    {{ $data->admin->nik }}
                                 </td>
                                 <td class="py-4 px-6 ">
                                     <div class="flex flex-row space-x-4">
@@ -74,7 +68,7 @@
                 </table>
 
                 <div class="bg-white p-5">
-                    {{ $mahasiswa->links() }}
+                    {{ $admin->links() }}
                 </div>
             </div>
         </div>

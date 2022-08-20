@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Mahasiswa') }}
+            {{ __('List Kursus') }}
         </h2>
     </x-slot>
 
@@ -15,11 +15,6 @@
                     </div>
                 </div>
             @endif
-
-            <div class="flex justify-end mb-4">
-                <a href="{{ route('mahasiswa.create') }}"  class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Tambah Mahasiswa</a>
-            </div>
-
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -28,13 +23,10 @@
                                 No.
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Nama
+                                Nama Kursus
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Npm 
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Kelas
+                                Lama Kursus
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Action
@@ -42,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mahasiswa as $data)
+                        @foreach ($kursus as $data)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $loop->iteration }}
@@ -51,21 +43,11 @@
                                     {{ $data->nama }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ $data->mahasiswa->npm }}
-                                </td>
-                                <td class="py-4 px-6">
-                                    {{ $data->mahasiswa->kelas }}
+                                    {{ $data->lama_kursus }} Hari
                                 </td>
                                 <td class="py-4 px-6 ">
                                     <div class="flex flex-row space-x-4">
-                                        <a href="{{ route('mahasiswa.edit', $data->id_user) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
-    
-                                        <form action="{{ route('mahasiswa.destroy', $data->id_user ) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="font-medium text-blue-600 hover:underline">Delete</button>
-                                        </form>
+                                        <a href="{{ route('list-kursus.jadwal', $data->id_kursus) }}" class="font-medium text-blue-600 hover:underline">Jadwal Kursus</a>
                                     </div>
                                 </td>
                             </tr>
@@ -74,7 +56,7 @@
                 </table>
 
                 <div class="bg-white p-5">
-                    {{ $mahasiswa->links() }}
+                    {{ $kursus->links() }}
                 </div>
             </div>
         </div>

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Store\StoreMahasiswaRequest;
-use App\Http\Requests\Update\UpdateMahasiswaRequest;
-use App\Models\Mahasiswa;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Requests\Store\StoreAdminRequest;
+use App\Http\Requests\Update\UpdateAdminRequest;
 use Illuminate\Support\Facades\Hash;
 
-class MahasiswaController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +19,9 @@ class MahasiswaController extends Controller
     {
         abort_if(auth()->user()->role != 'admin', 403);
 
-        $mahasiswa = User::where('role', 'mahasiswa')->paginate(10);
+        $admin = User::where('role', 'admin')->paginate(10);
 
-        return view('mahasiswa.index', compact('mahasiswa'));
+        return view('admin.index', compact('admin'));
     }
 
     /**
@@ -34,7 +33,7 @@ class MahasiswaController extends Controller
     {
         abort_if(auth()->user()->role != 'admin', 403);
 
-        return view('mahasiswa.create');
+        return view('admin.create');
     }
 
     /**
@@ -43,7 +42,7 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMahasiswaRequest $request)
+    public function store(StoreAdminRequest $request)
     {
         abort_if(auth()->user()->role != 'admin', 403);
 
@@ -52,15 +51,16 @@ class MahasiswaController extends Controller
             'nama' => $request->nama,
             'nomor_telepon' => $request->nomor_telepon,
             'password' => Hash::make($request->password),
-            'role' => 'mahasiswa'
+            'role' => 'admin'
         ]);
 
-        $user->mahasiswa()->create([
-            'npm' => $request->npm,
-            'kelas' => $request->kelas
+        $user->admin()->create([
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin
         ]);
 
-        return redirect(route('mahasiswa.index'))->with('message', 'Mahasiswa berhasil ditambah!!');;
+        return redirect(route('admin.index'))->with('message', 'Admin berhasil ditambah!!');;
     }
 
     /**
@@ -82,14 +82,7 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        abort_if(auth()->user()->role != 'admin', 403);
-
-        $mahasiswa = User::where([
-            'id_user' => $id,
-            'role' => 'mahasiswa'
-        ])->firstOrFail();
-
-        return view('mahasiswa.edit', compact('mahasiswa'));
+        //
     }
 
     /**
@@ -99,18 +92,9 @@ class MahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMahasiswaRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        abort_if(auth()->user()->role != 'admin', 403);
-
-        $mahasiswa = User::where([
-            'id_user' => $id,
-            'role' => 'mahasiswa'
-        ])->firstOrFail();
-
-        $mahasiswa->update($request->validated());
-
-        return redirect(route('mahasiswa.edit', $id))->with('message', 'Mahasiswa berhasil diubah!!');;
+        //
     }
 
     /**
@@ -121,15 +105,6 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        abort_if(auth()->user()->role != 'admin', 403);
-
-        $mahasiswa = User::where([
-            'id_user' => $id,
-            'role' => 'mahasiswa'
-        ])->firstOrFail();
-
-        $mahasiswa->delete();
-
-        return redirect()->back()->with('message', 'Mahasiswa berhasil dihapus!!');;
+        //
     }
 }

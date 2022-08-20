@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Mahasiswa') }}
+            {{ __('Pendaftaran Mahasiswa') }}
         </h2>
     </x-slot>
 
@@ -16,8 +16,8 @@
                 </div>
             @endif
 
-            <div class="flex justify-end mb-4">
-                <a href="{{ route('mahasiswa.create') }}"  class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Tambah Mahasiswa</a>
+            <div class="flex justify-end">
+                <a href="{{ route('jadwal.index') }}" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">Back</a>
             </div>
 
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -28,13 +28,13 @@
                                 No.
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Nama
+                                Nama Mahasiswa
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Npm 
+                                NPM Mahasiswa
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Kelas
+                                Kelas Mahasiswa
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Action
@@ -42,39 +42,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mahasiswa as $data)
+                        @foreach ($pendaftaran as $data)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $loop->iteration }}
                                 </th>
                                 <td class="py-4 px-6">
-                                    {{ $data->nama }}
+                                    {{ $data->user->mahasiswa->nama }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ $data->mahasiswa->npm }}
+                                    {{ $data->user->mahasiswa->npm }}
                                 </td>
-                                <td class="py-4 px-6">
-                                    {{ $data->mahasiswa->kelas }}
-                                </td>
-                                <td class="py-4 px-6 ">
+                                {{-- <td class="py-4 px-6 ">
                                     <div class="flex flex-row space-x-4">
-                                        <a href="{{ route('mahasiswa.edit', $data->id_user) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                        <a href="{{ route('jadwal.edit', $data->id_jadwal) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
     
-                                        <form action="{{ route('mahasiswa.destroy', $data->id_user ) }}"
+                                        <form action="{{ route('jadwal.destroy', $data->id_jadwal ) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="font-medium text-blue-600 hover:underline">Delete</button>
                                         </form>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
 
                 <div class="bg-white p-5">
-                    {{ $mahasiswa->links() }}
+                    {{ $pendaftaran->links() }}
                 </div>
             </div>
         </div>
