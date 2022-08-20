@@ -28,7 +28,5 @@ class ListKursusController extends Controller
     public function detailJadwal($id, $jadwalId)
     {
         abort_if(auth()->user()->role != 'mahasiswa', 403);
-
-        
     }
 }

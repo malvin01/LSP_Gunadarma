@@ -39,6 +39,14 @@ Route::group(['middleware' => ['auth']], function(){
         '/data-diri-mahasiswa',
         [DataDiriMahasiswaController::class, 'uploadKrs']
     )->name('data-diri-mahasiswa.uploadKrs');
+
+    Route::get(
+        'data-diri-mahasiswa/{media}',
+        [
+            DataDiriMahasiswaController::class, 'downloadFile'
+        ]
+    )->name('data-diri-mahasiswa.downloadFile');
+
     
 
     //admin controller

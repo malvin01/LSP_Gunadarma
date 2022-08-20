@@ -94,7 +94,7 @@
                 <div class="px-4 py-5 bg-white sm:p-6">
                   <div class="grid grid-cols-6 gap-6">
                     @if (auth()->user()->getFirstMediaUrl('krs'))
-                      
+                      <a href="{{ route('data-diri-mahasiswa.downloadFile') }}">Donwload KRS</a>
                     @else
                       <div class="col-span-6">
                         <label for="krs" class="block text-sm font-medium text-gray-700
@@ -109,11 +109,13 @@
                     @endif
                   </div>
                 </div>
+                @if (!auth()->user()->getFirstMediaUrl('krs'))
                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent 
                   shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 
                   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                 </div>
+                @endif
               </div>
             </form>             
         </div>

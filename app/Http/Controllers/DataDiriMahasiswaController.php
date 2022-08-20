@@ -18,6 +18,11 @@ class DataDiriMahasiswaController extends Controller
 
         $user->addMediaFromRequest('krs')
         ->toMediaCollection('krs');
-
     }
+
+    public function downloadFile(Media $media)
+    {
+        return response()->download($media->getPath(), $media->file_name);
+    }
+
 }
